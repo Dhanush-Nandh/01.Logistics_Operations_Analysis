@@ -4,7 +4,7 @@
 **Logistics Operations & Asset Performance Analytics:** This project provides an end-to-end data solution for a mid-sized trucking firm and analyses three years of logistics data using SQL and Power BI. I transformed 14 raw relational datasets into a multi-page executive dashboard. The goal was to identify "profit-killers" like detention time, fuel inefficiency, and safety liabilities that are often hidden in raw operational logs. *CHANGE THIS LATER*
 
 ## Tools Used
-* **SQL Server(SSMS):** Data cleaning, ETL (Extract, Transform, Load), JOINing tables, data type standardization, and building a reporting layer via SQL Views.
+* **SQL Server(SSMS):** Data cleaning, ETL (Extract, Transform, Load), JOINing tables, Exploratory Data Analysis (EDA), and building a reporting layer via SQL Views.
 * **Power BI:** Star Schema data modeling, and interactive visuals using DAX for performance KPIs. 
 * **Logistics Domain Knowledge:** Applied industry expertise to define "at-risk" metrics for drivers and assets.
 
