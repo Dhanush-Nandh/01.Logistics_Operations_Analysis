@@ -48,9 +48,53 @@ HAVING c.account_status = 'Active'
 ORDER BY ActualRevenue_$ DESC
 ```
 **Result & Key Insights:**
-> The top 10 active customers accounted for approximately $14.58M in actual revenue.
-> All identified customers exceeded their estimated potential, indicating strong account growth.
-> For operational efficiency, average load value can help determine customers who order frequently in small revenue versus those with not-so-frequent high-value shipments.
+* **The "Power 10" Revenue Drivers:** The top 10 active customers accounted for approximately $14.58M in actual revenue so these warrant premium service to ensure continued retention.
+* **Higher Growth Potential:** All identified customers exceeded their estimated potential, indicating strong account growth.
+* **Operational efficiency:** Average load value can help determine customers who order frequently in small revenue (High-Frequency/Low-Value) versus those with not-so-frequent high-value shipments (Low-Frequency/High-Value).
+
+### Q2. Driver Retention & Experience Analysis
+
+**Objective:** To determine if a driver’s prior experience correlates with their longevity (tenure) at the company. This helps the HR and Logistics teams understand which "ExperienceLevel" Segment are most stable and where turnover risk might be highest.
+
+**Action:** Used a `CASE` statement to bucket drivers into four seniority levels: Junior (0-2 yrs), Mid-level (3-10 yrs), Senior (11-20 yrs), and Veteran (more than 20 yrs) based on their experience. Implemented defensive logic using `ISNULL(termination_date, GETDATE())` to ensure active drivers are included in the tenure calculation. Calculated the average tenure in years using `DATEDIFF` and grouped by the custom experience buckets. 
+
+**SQL Query:** 
+```
+SELECT 
+CASE
+	WHEN years_experience <=  2 THEN 'Junior'
+	WHEN years_experience <= 10 THEN 'Mid-level'
+	WHEN years_experience <= 20 THEN 'Senior'
+	ELSE 'Veteran' 
+END AS ExperienceLevel,
+AVG(DATEDIFF(dd, hire_date, ISNULL(termination_date,GETDATE()))/365.0) AS AverageTenure_Years
+FROM dbo.drivers
+GROUP BY 
+CASE
+	WHEN years_experience <=  2 THEN 'Junior'
+	WHEN years_experience <= 10 THEN 'Mid-level'
+	WHEN years_experience <= 20 THEN 'Senior'
+	ELSE 'Veteran' 
+END 
+```
+**Result & Key Insights:**
+* **Address the "Junior Gap":** Junior drivers have the shortest tenure, suggesting that the first 2 years are the "high-risk" period where retention programs (mentorship or sign-on bonuses) should be focused.
+* **Knowledge Transfer via Mentorship:** Veterans possess 20+ years of "road wisdom." By creating a **Lead Driver Mentorship Program**, the company can pay Veterans a premium to train Juniors, increasing the stability of the entire fleet.
+* **Predictive Retention:** Because experience directly correlates with tenure, the "Mid-level" segment (3-10 years) represents the most critical period for "upskilling" to ensure they transition into the loyal Senior tier.
+* **Loyalty Rewards (Lane Priority):** High-tenure drivers (Senior/Veteran) should be prioritized for premium, high-efficiency shipping lanes. This rewards loyalty with better work-life balance.
+
+### Q3. Start here
+
+**Objective:** 
+
+**Action:** 
+
+**SQL Query:** 
+```
+
+```
+
+**Result & Key Insights:**
 
 ## Data Modeling (Power BI)
 *UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
