@@ -27,11 +27,13 @@ Applied O.A.R. (Objective, Action, Result & Key Insights) Framework in this segm
 
 ### Q1. Top Performing Active Customers (Revenue Variance Analysis)
 
-**Objective:** To identify "High-Value" active customers who have outperformed their estimated annual revenue. This helps identify which accounts are over-delivering and may require premium support or upselling focus.
+<ins>**Objective:**</ins> 
 
-**Action:** Performed an `INNER JOIN` between `loads` and `customers` tables. I calculated the **Revenue Variance** (Actual - Estimated) and the **Average Load Value** per shipment. To include profitable over-performers, I used a `HAVING` clause to filter for 'Active' status and positive revenue variance.
+To identify "High-Value" active customers who have outperformed their estimated annual revenue. This helps identify which accounts are over-delivering and may require premium support or upselling focus.
 
-**SQL Query:** 
+<ins>**Action:**</ins> Performed an `INNER JOIN` between `loads` and `customers` tables. I calculated the **Revenue Variance** (Actual - Estimated) and the **Average Load Value** per shipment. To include profitable over-performers, I used a `HAVING` clause to filter for 'Active' status and positive revenue variance.
+
+<ins>**SQL Query:**</ins> 
 ```
 SELECT TOP 10
 	c.customer_name,
@@ -47,18 +49,20 @@ HAVING c.account_status = 'Active'
 	AND SUM(l.CleanRevenue) - c.annual_revenue_potential > 0 
 ORDER BY ActualRevenue_$ DESC
 ```
-**Result & Key Insights:**
+<ins>**Result & Key Insights:**</ins>
 * **The "Power 10" Revenue Drivers:** The top 10 active customers accounted for approximately $14.58M in actual revenue so these warrant premium service to ensure continued retention.
 * **Higher Growth Potential:** All identified customers exceeded their estimated potential, indicating strong account growth.
 * **Operational efficiency:** Average load value can help determine customers who order frequently in small revenue (High-Frequency/Low-Value) versus those with not-so-frequent high-value shipments (Low-Frequency/High-Value).
 
 ### Q2. Driver Retention & Experience Analysis
 
-**Objective:** To determine if a driver’s prior experience correlates with their longevity (tenure) at the company. This helps the HR and Logistics teams understand which "ExperienceLevel" Segment are most stable and where turnover risk might be highest.
+<ins>**Objective:**</ins> 
 
-**Action:** Used a `CASE` statement to bucket drivers into four seniority levels: Junior (0-2 yrs), Mid-level (3-10 yrs), Senior (11-20 yrs), and Veteran (more than 20 yrs) based on their experience. Implemented defensive logic using `ISNULL(termination_date, GETDATE())` to ensure active drivers are included in the tenure calculation. Calculated the average tenure in years using `DATEDIFF` and grouped by the custom experience buckets. 
+To determine if a driver’s prior experience correlates with their longevity (tenure) at the company. This helps the HR and Logistics teams understand which "ExperienceLevel" Segment are most stable and where turnover risk might be highest.
 
-**SQL Query:** 
+<ins>**Action:**</ins> Used a `CASE` statement to bucket drivers into four seniority levels: Junior (0-2 yrs), Mid-level (3-10 yrs), Senior (11-20 yrs), and Veteran (more than 20 yrs) based on their experience. Implemented defensive logic using `ISNULL(termination_date, GETDATE())` to ensure active drivers are included in the tenure calculation. Calculated the average tenure in years using `DATEDIFF` and grouped by the custom experience buckets. 
+
+<ins>**SQL Query:**</ins> 
 ```
 SELECT 
 CASE
@@ -77,7 +81,7 @@ CASE
 	ELSE 'Veteran' 
 END 
 ```
-**Result & Key Insights:**
+<ins>**Result & Key Insights:**</ins>
 * **Address the "Junior Gap":** Junior drivers have the shortest tenure, suggesting that the first 2 years are the "high-risk" period where retention programs (mentorship or sign-on bonuses) should be focused.
 * **Knowledge Transfer via Mentorship:** Veterans possess 20+ years of "road wisdom." By creating a **Lead Driver Mentorship Program**, the company can pay Veterans a premium to train Juniors, increasing the stability of the entire fleet.
 * **Predictive Retention:** Because experience directly correlates with tenure, the "Mid-level" segment (3-10 years) represents the most critical period for "upskilling" to ensure they transition into the loyal Senior tier.
@@ -85,16 +89,42 @@ END
 
 ### Q3. Start here
 
-**Objective:** 
+<ins>**Objective:**</ins> 
 
-**Action:** 
+<ins>**Action:**</ins> 
 
-**SQL Query:** 
+<ins>**SQL Query:**</ins> 
 ```
 
 ```
 
-**Result & Key Insights:**
+<ins>**Result & Key Insights:**</ins>
+
+### Q4. Start here
+
+<ins>**Objective:**</ins> 
+
+<ins>**Action:**</ins> 
+
+<ins>**SQL Query:**</ins> 
+```
+
+```
+
+<ins>**Result & Key Insights:**</ins>
+
+### Q5. Start here
+
+<ins>**Objective:**</ins> 
+
+<ins>**Action:**</ins> 
+
+<ins>**SQL Query:**</ins> 
+```
+
+```
+
+<ins>**Result & Key Insights:**</ins>
 
 ## Data Modeling (Power BI)
 *UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
