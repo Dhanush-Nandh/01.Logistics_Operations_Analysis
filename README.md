@@ -3,6 +3,8 @@
 ## Project Overview
 **Logistics Operations & Asset Performance Analytics:** This project provides an end-to-end data solution for a mid-sized trucking firm and analyses three years of logistics data using SQL and Power BI. I transformed 14 raw relational datasets into a multi-page executive dashboard. The goal was to identify "profit-killers" like detention time, fuel inefficiency, and safety liabilities that are often hidden in raw operational logs. *CHANGE THIS LATER*
 
+## Data Dictionary
+
 ## Tools Used
 * **SQL Server(SSMS):** Data cleaning, ETL (Extract, Transform, Load), JOINing tables, Exploratory Data Analysis (EDA), and building a reporting layer via SQL Views.
 * **Power BI:** Star Schema data modeling, and interactive visuals using DAX for performance KPIs. 
@@ -18,7 +20,7 @@ The dataset is a comprehensive Logistics Operations Database (sourced from Kaggl
 **Challenge:** Upon ingestion, numeric financial/float data was truncated due to SSMS "Flat File" import limitations (Float/Decimal precision errors). 
 **Solution:** I implemented a robust "Staging-to-Production" pipeline:
 1. Ingested raw data as VARCHAR to prevent data loss.
-2. Developed 01_Data_Cleaning.sql using Nested `TRY_CAST` (VARCHAR → FLOAT → DECIMAL) approach to ensure string-to-numeric precision.
+2. Developed `01_Data_Cleaning.sql` using Nested `TRY_CAST` (VARCHAR → FLOAT → DECIMAL) approach to ensure string-to-numeric precision.
 3. Used `SELECT` comparison statements to audit the results. By filtering for **WHERE RawColumn IS NOT NULL AND CleanColumn IS NULL**, I could instantly identify any rows that failed the transformation.
 > **Note:** *ADD A NOTE LATER*
 
