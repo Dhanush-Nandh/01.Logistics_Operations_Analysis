@@ -10,17 +10,47 @@
 
 ## The Data
 The dataset is a comprehensive Logistics Operations Database (sourced from Kaggle https://www.kaggle.com/datasets/yogape/logistics-operations-database), consisting of 14 CSV files representing:
-* **Core Tables:** drivers, trucks, trailers, customers, facilities, routes
-* **Transaction Tables:** loads, trips, fuel_purchases, maintenance_records, delivery_events, safety_incidents
-* **Aggregated Metrics:** driver_monthly_metrics, truck_utilization_metrics
+* **Core Tables:** `drivers`, `trucks`, `trailers`, `customers`, `facilities`, `routes`
+* **Transaction Tables:** `loads`, `trips`, `fuel_purchases`, `maintenance_records`, `delivery_events`, `safety_incidents`
+* **Aggregated Metrics:** `driver_monthly_metrics`, `truck_utilization_metrics`
 
 ## SQL Highlights: Data Engineering & ETL
 **Challenge:** Upon ingestion, numeric financial/float data was truncated due to SSMS "Flat File" import limitations (Float/Decimal precision errors). 
 **Solution:** I implemented a robust "Staging-to-Production" pipeline:
 1. Ingested raw data as VARCHAR to prevent data loss.
-2. Developed 01_Data_Cleaning.sql using Nested TRY_CAST (VARCHAR → FLOAT → DECIMAL) approach to ensure string-to-numeric precision.
-3. Used SELECT comparison statements to audit the results. By filtering for **WHERE RawColumn IS NOT NULL AND CleanColumn IS NULL**, I could instantly identify any rows that failed the transformation.
+2. Developed 01_Data_Cleaning.sql using Nested `TRY_CAST` (VARCHAR → FLOAT → DECIMAL) approach to ensure string-to-numeric precision.
+3. Used `SELECT` comparison statements to audit the results. By filtering for **WHERE RawColumn IS NOT NULL AND CleanColumn IS NULL**, I could instantly identify any rows that failed the transformation.
 > **Note:** *ADD A NOTE LATER*
+
+## Exploratory Data Analysis (EDA)
+Applied O.A.R. (Objective, Action, Result & Key Insights) Framework in this segment to answer and provide key insights. 
+
+### Q1. Top Performing Active Customers (Revenue Variance Analysis)
+
+**Objective:** To identify "High-Value" active customers who have outperformed their estimated annual revenue. This helps identify which accounts are over-delivering and may require premium support or upselling focus.
+
+**Action:** Performed an `INNER JOIN` between `loads` and `customers` tables. I calculated the **Revenue Variance** (Actual - Estimated) and the **Average Load Value** per shipment. To include profitable over-performers, I used a `HAVING` clause to filter for 'Active' status and positive revenue variance.
+
+**SQL Query:** 
+```
+SELECT TOP 10
+	c.customer_name,
+	c.annual_revenue_potential                        AS EstimatedRevenue_$,
+	SUM(l.CleanRevenue)                               AS ActualRevenue_$,
+	SUM(l.CleanRevenue) - c.annual_revenue_potential  AS RevenueVariance_$, 
+	SUM(l.CleanRevenue) / COUNT(l.load_id)            AS AvgLoadValue_$     
+FROM dbo.loads            AS l
+INNER JOIN dbo.customers  AS c
+	ON l.customer_id = c.customer_id
+GROUP BY c.customer_name, c.account_status, c.annual_revenue_potential
+HAVING c.account_status = 'Active' 
+	AND SUM(l.CleanRevenue) - c.annual_revenue_potential > 0 
+ORDER BY ActualRevenue_$ DESC
+```
+**Result & Key Insights:**
+> The top 10 active customers accounted for approximately $14.58M in actual revenue.
+> All identified customers exceeded their estimated potential, indicating strong account growth or conservative forecasting.
+> For operational efficiency, average load value can help determine customers who order frequently in small revenue versus those with not-so-frequent high-value shipments.
 
 ## Data Modeling (Power BI)
 *UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
