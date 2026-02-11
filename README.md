@@ -49,7 +49,7 @@ ORDER BY ActualRevenue_$ DESC
 ```
 **Result & Key Insights:**
 > The top 10 active customers accounted for approximately $14.58M in actual revenue.
-> All identified customers exceeded their estimated potential, indicating strong account growth or conservative forecasting.
+> All identified customers exceeded their estimated potential, indicating strong account growth.
 > For operational efficiency, average load value can help determine customers who order frequently in small revenue versus those with not-so-frequent high-value shipments.
 
 ## Data Modeling (Power BI)
