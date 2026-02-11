@@ -8,7 +8,7 @@
 ## Tools Used
 * **SQL Server(SSMS):** Data cleaning, ETL (Extract, Transform, Load), JOINing tables, Exploratory Data Analysis (EDA), and building a reporting layer via SQL Views.
 * **Power BI:** Star Schema data modeling, and interactive visuals using DAX for performance KPIs. 
-* **Logistics Domain Knowledge:** Applied industry expertise to define "at-risk" metrics for drivers and assets.
+* **Logistics Domain Knowledge:** Applied industry expertise to define "at-risk" or KPI metrics for assets. 
 
 ## The Data
 The dataset is a comprehensive Logistics Operations Database (sourced from Kaggle https://www.kaggle.com/datasets/yogape/logistics-operations-database), consisting of 14 CSV files representing:
