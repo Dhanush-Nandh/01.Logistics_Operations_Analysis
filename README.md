@@ -123,18 +123,51 @@ ORDER BY f_sub.trip_id ASC
 * **Pricing Strategy:** These results suggest the need for a more dynamic surcharge model and proves that the company’s model is not reacting fast enough to fuel market volatility.
 * **Sub-Query Logic** By aggregating `fuel_purchases` before joining, we ensure that trips with 2 or more fuel stops are correctly totaled, preventing an under-estimation of costs.
 
-### Q4. Start here
+### Q4. Asset Health: Maintenance Costs vs. Utilization
 
 <ins>**Objective:**</ins> 
 
-<ins>**Action:**</ins> 
+To identify "underperforming assets"—specifically trucks that are expensive to maintain but are not being utilized enough to justify those costs. This analysis helps leadership decide which vehicle makes/models to decommission or phase out of the fleet.
+
+<ins>**Action:**</ins> Used Subqueries (Derived Tables) to aggregate data from two different sources: `maintenance_records` (to count events) and `truck_utilization_metrics` (for financial and utilization data) and used `LEFT JOIN`. Calculated "Maintenance Cost per Event" by dividing total maintenance (labor and parts) costs by the count of maintenance events. Performed a second `LEFT JOIN` to `trucks` table to retrieve the specific Make of the vehicle for trend analysis. Then filtered the results using a `WHERE` clause based on 
+* trucks which are active (as there are records with inactive or in maintenance status)
+* Maintenance Cost: > $2,000 per event.
+* Low Utilization: < 85% (industry benchmarks: 85 to 100%).
 
 <ins>**SQL Query:**</ins> 
 ```
-
+SELECT 
+	t.truck_id,
+	t.make,
+	tab_2.Maintenance_Costs / tab_1.Maintenance_Events AS MaintenanceCosts$_perEvent
+FROM 
+(
+       SELECT  
+		   truck_id,
+	       COUNT(maintenance_type) AS Maintenance_Events
+       FROM dbo.maintenance_records
+       GROUP BY truck_id 
+) AS tab_1
+LEFT JOIN 
+(
+       SELECT
+	       truck_id,
+	       SUM(CleanMaintenanceCost) AS Maintenance_Costs,
+	       AVG(CleanUtilizationRate) AS Avg_UtilizationRate
+       FROM dbo.truck_utilization_metrics
+       GROUP BY truck_id
+) AS tab_2
+	ON tab_1.truck_id = tab_2.truck_id
+LEFT JOIN dbo.trucks AS t
+	ON tab_1.truck_id = t.truck_id
+WHERE t.status = 'Active' 
+	AND tab_2.Maintenance_Costs / tab_1.Maintenance_Events > 2000 
+	AND tab_2.Avg_UtilizationRate < 0.85 --industry benchmark rate is 85-100%
+ORDER BY t.make ASC
 ```
-
 <ins>**Result & Key Insights:**</ins>
+* **Make-Specific Issues:** More than half of the underperforming trucks (15 out of 28) belong to "Freightliner" and "International." This suggests a systemic issue with these specific makes and allows the team to negotiate better warranties or replacing them with more reliable manufacturers to improve the overall fleet uptime.
+* **Underperforming assets:** These 28 trucks are "active" but are effectively cash-drains. They are in the workshop for expensive repairs but aren't spending enough time on the road to pay for themselves.
 
 ### Q5. Start here
 
