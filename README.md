@@ -89,18 +89,39 @@ END
 * **Predictive Retention:** Because experience directly correlates with tenure, the "Mid-level" segment (3-10 years) represents the most critical period for "upskilling" to ensure they transition into the loyal Senior tier.
 * **Loyalty Rewards (Lane Priority):** High-tenure drivers (Senior/Veteran) should be prioritized for premium, high-efficiency shipping lanes. This rewards loyalty with better work-life balance.
 
-### Q3. Start here
+### Q3. Fuel Surcharge vs. Actual Cost Analysis (Margin Leakage)
 
 <ins>**Objective:**</ins> 
 
-<ins>**Action:**</ins> 
+To evaluate the accuracy of the fuel surcharge model by comparing the revenue collected (`CleanFuelSurcharge`) against the actual expenses incurred at the pump (`CleanTotalCost`). The goal is to identify "under-recovered" trips where fuel costs exceeded the surcharge, directly impacting the operating margin.
+
+<ins>**Action:**</ins> Used a `LEFT JOIN` to combine the `loads` table with a subquery from the table `fuel_purchases`. The subquery aggregates fuel spent at the trip_id level to account for multiple fuel stops per journey. Next, calculated Fuel Variance (Surcharge - Actual Cost) and applied a `WHERE` clause to isolate only the trips where the company lost money (Variance < 0), focusing the analysis on financial leakage.
 
 <ins>**SQL Query:**</ins> 
 ```
-
+SELECT
+	f_sub.trip_id,
+	l.CleanFuelSurcharge AS FuelSurcharge,         
+	f_sub.Actual_FuelCost,   
+	l.CleanFuelSurcharge - f_sub.Actual_FuelCost AS FuelVariance
+FROM dbo.trips AS t
+LEFT JOIN dbo.loads AS l
+	ON t.load_id = l.load_id
+LEFT JOIN ( 
+	        SELECT 
+				f.trip_id,
+				SUM(f.CleanTotalCost) AS Actual_FuelCost
+			FROM dbo.fuel_purchases AS f
+			GROUP BY f.trip_id
+		  ) AS f_sub
+	ON t.trip_id = f_sub.trip_id
+WHERE (l.CleanFuelSurcharge - f_sub.Actual_FuelCost) < 0
+ORDER BY f_sub.trip_id ASC
 ```
-
 <ins>**Result & Key Insights:**</ins>
+* **Margin Erosion:** Identified specific trips where the fuel surcharge failed to cover actual costs, indicating a potential lag between market fuel price spikes and surcharge adjustments.If the surcharge doesn't cover the actual fuel price, the company loses money before the wheels even turn.
+* **Pricing Strategy:** These results suggest the need for a more dynamic surcharge model and proves that the company’s model is not reacting fast enough to fuel market volatility.
+* **Sub-Query Logic** By aggregating `fuel_purchases` before joining, we ensure that trips with 2 or more fuel stops are correctly totaled, preventing an under-estimation of costs.
 
 ### Q4. Start here
 
