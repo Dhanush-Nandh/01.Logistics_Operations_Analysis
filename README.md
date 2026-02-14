@@ -35,7 +35,7 @@ To identify "High-Value" active customers who have outperformed their estimated 
 
 <ins>**Action:**</ins> Performed an `INNER JOIN` between `loads` and `customers` tables. I calculated the **Revenue Variance** (Actual - Estimated) and the **Average Load Value** per shipment. To include profitable over-performers, I used a `HAVING` clause to filter for 'Active' status and positive revenue variance.
 
-<ins>**SQL Query:**</ins> 
+<ins>**SQL Query:**</ins> 🔗 [View the full SQL script for this analysis here.](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/Q1_Analysis.sql)
 ```
 SELECT TOP 10
 	c.customer_name,
