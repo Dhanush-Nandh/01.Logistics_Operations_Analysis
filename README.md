@@ -169,18 +169,34 @@ ORDER BY t.make ASC
 * **Make-Specific Issues:** More than half of the underperforming trucks (15 out of 28) belong to "Freightliner" and "International." This suggests a systemic issue with these specific makes and allows the team to negotiate better warranties or replacing them with more reliable manufacturers to improve the overall fleet uptime.
 * **Underperforming assets:** These 28 trucks are "active" but are effectively cash-drains. They are in the workshop for expensive repairs but aren't spending enough time on the road to pay for themselves.
 
-### Q5. Start here
+### Q5. The Risk Audit (Preventable Incident Financial Ranking)
 
 <ins>**Objective:**</ins> 
 
-<ins>**Action:**</ins> 
+To perform a financial analysis on safety incidents. By ranking "At-Fault" and "Preventable" claims, we can identify which specific incident types carry the highest financial risk and which drivers may require immediate safety re-training. 
+
+<ins>**Action:**</ins> Used the `RANK()` window function, partitioned by `incident_type`, to create a relative financial ranking for every claim. Joined the `safety_incidents` table with the `drivers` table to provide accountability by driver's full name using `CONCAT`. Then filtered specifically for `at_fault_flag` and `preventable_flag` to isolate incidents where driver behavior was the primary cause. Finally, focused exclusively on claims with a financial impact `(CleanClaimAmount > 0)`.
 
 <ins>**SQL Query:**</ins> 
 ```
-
+SELECT 
+	RANK() OVER(PARTITION BY s.incident_type ORDER BY s.CleanClaimAmount DESC) AS Rank_no,
+	s.incident_type,
+	CONCAT(d.first_name, ' ', d.last_name) AS Driver_fullname,
+	s.description,
+	s.CleanClaimAmount AS ClaimAmount
+FROM dbo.safety_incidents AS s
+LEFT JOIN dbo.drivers AS d
+	ON s.driver_id = d.driver_id
+WHERE s.at_fault_flag = 1 
+	AND s.preventable_flag = 1
+	AND s.CleanClaimAmount > 0
 ```
 
 <ins>**Result & Key Insights:**</ins>
+* **Financial Prioritization:** The PARTITION BY logic allows the safety team to see the "Worst-in-Class" for each category. The ranking quickly identifies expensive claims that can wipe out the profit margins.
+* **Driver Accountability:** The use of full names allows the leadership to quickly see if certain names appear at the top of the rankings across multiple incident types and how frequent by maintaining a list. 
+* **Insurance Impact::** This list is vital for insurance renewals. Showing that the company actively ranks and audits preventable claims proves a "Safety First" culture, which can lead to lower premiums.
 
 ## Data Modeling (Power BI)
 *UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
