@@ -36,7 +36,7 @@ To identify "High-Value" active customers who have outperformed their estimated 
 
 <ins>**Action:**</ins> Performed an `INNER JOIN` between `loads` and `customers` tables. I calculated the **Revenue Variance** (Actual - Estimated) and the **Average Load Value** per shipment. To include profitable over-performers, I used a `HAVING` clause to filter for 'Active' status and positive revenue variance.
 
-<ins>**SQL Query:**</ins> 🔗 [View the full SQL script for this analysis here.](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/Q1_Analysis.sql)
+<ins>**SQL Query:**</ins> 🔗 [View the SQL script for Q1 analysis here.](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/Q1_Analysis.sql)
 ```
 SELECT TOP 10
 	c.customer_name,
@@ -65,7 +65,7 @@ To determine if a driver’s prior experience correlates with their longevity (t
 
 <ins>**Action:**</ins> Used a `CASE` statement to bucket drivers into four seniority levels: Junior (0-2 yrs), Mid-level (3-10 yrs), Senior (11-20 yrs), and Veteran (more than 20 yrs) based on their experience. Implemented defensive logic using `ISNULL(termination_date, GETDATE())` to ensure active drivers are included in the tenure calculation. Calculated the average tenure in years using `DATEDIFF` and grouped by the custom experience buckets. 
 
-<ins>**SQL Query:**</ins> 
+<ins>**SQL Query:**</ins> 🔗 [View the SQL script for Q2 analysis here.](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/Q2_Analysis.sql)
 ```
 SELECT 
 CASE
@@ -98,7 +98,7 @@ To evaluate the accuracy of the fuel surcharge model by comparing the revenue co
 
 <ins>**Action:**</ins> Used a `LEFT JOIN` to combine the `loads` table with a subquery from the table `fuel_purchases`. The subquery aggregates fuel spent at the trip_id level to account for multiple fuel stops per journey. Next, calculated Fuel Variance (Surcharge - Actual Cost) and applied a `WHERE` clause to isolate only the trips where the company lost money (Variance < 0), focusing the analysis on financial leakage.
 
-<ins>**SQL Query:**</ins> 
+<ins>**SQL Query:**</ins> 🔗 [View the SQL script for Q3 analysis here.](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/Q3_Analysis.sql)
 ```
 SELECT
 	f_sub.trip_id,
@@ -135,7 +135,7 @@ To identify "underperforming assets"—specifically trucks that are expensive to
 * Maintenance Cost: > $2,000 per event.
 * Low Utilization: < 85% (industry benchmarks: 85 to 100%).
 
-<ins>**SQL Query:**</ins> 
+<ins>**SQL Query:**</ins> 🔗 [View the SQL script for Q4 analysis here.](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/Q4.Analysis.sql)
 ```
 SELECT 
 	t.truck_id,
@@ -178,7 +178,7 @@ To perform a financial analysis on safety incidents. By ranking "At-Fault" and "
 
 <ins>**Action:**</ins> Used the `RANK()` window function, partitioned by `incident_type`, to create a relative financial ranking for every claim. Joined the `safety_incidents` table with the `drivers` table to provide accountability by driver's full name using `CONCAT`. Then filtered specifically for `at_fault_flag` and `preventable_flag` to isolate incidents where driver behavior was the primary cause. Finally, focused exclusively on claims with a financial impact `(CleanClaimAmount > 0)`.
 
-<ins>**SQL Query:**</ins> 
+<ins>**SQL Query:**</ins> 🔗 [View the SQL script for Q5 analysis here.](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/Q5.Analysis.sql) 
 ```
 SELECT 
 	RANK() OVER(PARTITION BY s.incident_type ORDER BY s.CleanClaimAmount DESC) AS Rank_no,
