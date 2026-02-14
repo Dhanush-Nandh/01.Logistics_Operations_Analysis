@@ -21,7 +21,7 @@ The dataset is a comprehensive Logistics Operations Database 🔗 [Kaggle source
 **Challenge:** Upon ingestion, numeric financial/float data was truncated due to SSMS "Flat File" import limitations (Float/Decimal precision errors). 
 **Solution:** I implemented a robust "Staging-to-Production" pipeline:
 1. Ingested raw data as VARCHAR to prevent data loss.
-2. Developed `01_Data_Cleaning.sql` using Nested `TRY_CAST` (VARCHAR → FLOAT → DECIMAL) approach to ensure string-to-numeric precision.
+2. Developed [01_Data_Cleaning.sql](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/01_Data_Cleaning.sql) using Nested `TRY_CAST` (VARCHAR → FLOAT → DECIMAL) approach to ensure string-to-numeric precision.
 3. Used `SELECT` comparison statements to audit the results. By filtering for **WHERE RawColumn IS NOT NULL AND CleanColumn IS NULL**, I could instantly identify any rows that failed the transformation.
 > **Note:** *ADD A NOTE LATER*
 
