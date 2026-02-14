@@ -11,7 +11,8 @@
 * **Logistics Domain Knowledge:** Applied industry expertise to define "at-risk" or KPI metrics for assets. 
 
 ## The Data
-The dataset is a comprehensive Logistics Operations Database (sourced from Kaggle https://www.kaggle.com/datasets/yogape/logistics-operations-database), consisting of 14 CSV files representing:
+The dataset is a comprehensive Logistics Operations Database 🔗 [Kaggle source](https://www.kaggle.com/datasets/yogape/logistics-operations-database)
+, consisting of 14 CSV files representing:
 * **Core Tables:** `drivers`, `trucks`, `trailers`, `customers`, `facilities`, `routes`
 * **Transaction Tables:** `loads`, `trips`, `fuel_purchases`, `maintenance_records`, `delivery_events`, `safety_incidents`
 * **Aggregated Metrics:** `driver_monthly_metrics`, `truck_utilization_metrics`
