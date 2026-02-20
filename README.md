@@ -3,8 +3,6 @@
 ## Project Overview
 **Logistics Operations & Asset Performance Analytics:** This project provides an end-to-end data solution for a mid-sized trucking firm and analyses three years of logistics data using SQL and Power BI. I transformed 14 raw relational datasets into a multi-page executive dashboard. The goal was to identify "profit-killers" like detention time, fuel inefficiency, and safety liabilities that are often hidden in raw operational logs. *CHANGE THIS LATER*
 
-## Data Dictionary
-
 ## Tools Used
 * **SQL Server(SSMS):** Data cleaning, ETL (Extract, Transform, Load), JOINing tables, Exploratory Data Analysis (EDA), and building a reporting layer via SQL Views.
 * **Power BI:** Star Schema data modeling, and interactive visuals using DAX for performance KPIs. 
@@ -198,6 +196,17 @@ WHERE s.at_fault_flag = 1
 * **Financial Prioritization:** The PARTITION BY logic allows the safety team to see the "Worst-in-Class" for each category. The ranking quickly identifies expensive claims that can wipe out the profit margins.
 * **Driver Accountability:** The use of full names allows the leadership to quickly see if certain names appear at the top of the rankings across multiple incident types and how frequent by maintaining a list. 
 * **Insurance Impact::** This list is vital for insurance renewals. Showing that the company actively ranks and audits preventable claims proves a "Safety First" culture, which can lead to lower premiums.
+
+## Reporting Layer (SQL Views)
+To ensure "One Version of the Truth" in my Power BI dashboard, I transformed my analysis into permanent **SQL Views**. This layer handles complex calculations at the database level, ensuring the dashboard remains fast and accurate.
+
+| View Name | Business Purpose | Source Script |
+| :--- | :--- | :--- |
+| `01_Customer_Revenue_Performance` | Tracks Revenue Potential vs. Actuals | [Link](./03_Reporting_Layer/Q1_High_Value_Customers.sql) |
+| `02_Driver_Retention_Analysis` | Segments tenure by experience level | [Link](./03_Reporting_Layer/Q2_Driver_Retention.sql) |
+| `03_Fuel_Surcharge_Accuracy` | Audits Fuel Surcharge vs. Actual Spend | [Link](./03_Reporting_Layer/Q3_Fuel_Surcharge.sql) |
+| `04_Asset_Health_Summary` | Identifies high-cost underutilized trucks | [Link](./03_Reporting_Layer/Q4_Asset_Health.sql) |
+| `05_Safety_Risk_Audit` | Ranks incidents by financial impact | [Link](./03_Reporting_Layer/Q5_Risk_Audit.sql) |
 
 ## Data Modeling (Power BI)
 *UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
