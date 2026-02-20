@@ -21,7 +21,6 @@ The dataset is a comprehensive Logistics Operations Database 🔗 [Kaggle source
 1. Ingested raw data as VARCHAR to prevent data loss.
 2. Developed [01_Data_Cleaning.sql](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/01_Data_Cleaning.sql) using Nested `TRY_CAST` (VARCHAR → FLOAT → DECIMAL) approach to ensure string-to-numeric precision.
 3. Used `SELECT` comparison statements to audit the results. By filtering for **WHERE RawColumn IS NOT NULL AND CleanColumn IS NULL**, I could instantly identify any rows that failed the transformation.
-> **Note:** *ADD A NOTE LATER*
 
 ## Exploratory Data Analysis (EDA)
 Applied O.A.R. (Objective, Action, Result & Key Insights) Framework in this segment to answer and provide key insights. 
@@ -198,15 +197,15 @@ WHERE s.at_fault_flag = 1
 * **Insurance Impact::** This list is vital for insurance renewals. Showing that the company actively ranks and audits preventable claims proves a "Safety First" culture, which can lead to lower premiums.
 
 ## Reporting Layer (SQL Views)
-To ensure "One Version of the Truth" in my Power BI dashboard, I transformed my analysis into permanent **SQL Views**. This layer handles complex calculations at the database level, ensuring the dashboard remains fast and accurate.
+Instead of connecting Power BI to raw, messy data, I built a dedicated reporting layer using **SQL Views**. This keeps the logic organized in the database and ensures the dashboard stays fast and efficient. 
 
 | View Name | Business Purpose | Source Script |
 | :--- | :--- | :--- |
-| `V1_Customer_Revenue_Performance` | Tracks Revenue Potential vs. Actuals | [Link](./03_Reporting_Layer/Q1_High_Value_Customers.sql) |
-| `V2_Driver_Retention_Analysis` | Segments tenure by experience level | [Link](./03_Reporting_Layer/Q2_Driver_Retention.sql) |
-| `V3_Fuel_Surcharge_Accuracy` | Audits Fuel Surcharge vs. Actual Spend | [Link](./03_Reporting_Layer/Q3_Fuel_Surcharge.sql) |
-| `V4_Asset_Health_Summary` | Identifies high-cost underutilized trucks | [Link](./03_Reporting_Layer/Q4_Asset_Health.sql) |
-| `V5_Safety_Risk_Audit` | Ranks incidents by financial impact | [Link](./03_Reporting_Layer/Q5_Risk_Audit.sql) |
+| `V1_Customer_Revenue_Performance` | Tracks Revenue Potential vs. Actuals | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V1_Customer_Revenue_Performance.sql) |
+| `V2_Driver_Retention_Analysis` | Segments tenure by experience level | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V2_Driver_Retention_Analysis.sql) |
+| `V3_Fuel_Surcharge_Accuracy` | Audits Fuel Surcharge vs. Actual Spend | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V3_Fuel_Surcharge_Accuracy.sql) |
+| `V4_Asset_Health_Summary` | Identifies high-cost underutilized trucks | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V4_Asset_Health_Summary.sql) |
+| `V5_Safety_Risk_Audit` | Ranks incidents by financial impact | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V5_Safety_Risk_Audit.sql) |
 
 ## Data Modeling (Power BI)
 *UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
