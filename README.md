@@ -240,8 +240,10 @@ The Benefit: This structure allows for "cross-filtering"—for example, seeing h
 
 **Key Insight:** Total financial liability from incidents reached $2.65M. A critical audit reveals that 34% of these costs ($904K) stem from "At-Fault" incidents, with $322K specifically categorized as "Preventable," representing a direct opportunity for cost savings through targeted safety coaching.
 
-## Key Insights & Recommendations
-*UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
-*1. Detention Impact: Which facilities have the highest wait times, and how does that correlate with "Accessorial Charges"?
-2. Fuel Efficiency: Identifying the variance between "Carrier Fuel Surcharge" income vs. "Actual Fuel Spend."
-3. Maintenance: Predicting which truck models incur higher repair costs as they age.*
+## Strategic Recommendations
+
+* **Restructure Fuel Surcharge:** Move to a mileage-based model to improve the current 31% cost recovery rate.
+
+* **Asset Liquidation:** Dispose of 28 'Dead' assets and replace 39 'High Risk' units to reduce the $4M maintenance spend.
+
+* **Revenue Capture:** Close the $219M sales gap by targeting the Top 10 Customers who are currently performing at less than 50% of their target potential.
