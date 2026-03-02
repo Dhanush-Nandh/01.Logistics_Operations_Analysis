@@ -1,16 +1,15 @@
 # 01.Logistics Operations Analysis
 
 ## Project Overview
-**Logistics Operations & Asset Performance Analytics:** This project is a full-cycle data solution for a trucking firm, transforming three years of raw operational logs into an executive-level reporting system. Using SQL Server for engineering and Power BI for visualization, I converted 14 relational datasets into actionable views. The project focuses on surfacing "hidden" costs—such as revenue analysis, fuel surcharge gaps, underutilized assets, and driver retention trends—that directly impact a fleet's bottom line.
+**Logistics Operations & Asset Performance Analytics:** This project is a full-cycle data solution for a trucking firm, transforming three years of raw operational logs into an executive-level reporting system. Using **SQL Server** for data engineering and **Power BI** for visualization, I converted **14 relational datasets** into a streamlined reporting layer. The project focuses on surfacing "hidden" costs—such as revenue analysis, fuel surcharge gaps, underutilized assets, and driver retention trends—to provide a 360-degree view of fleet profitability and risk. 
 
 ## Tools Used
-* **SQL Server(SSMS):** Data cleaning, ETL (Extract, Transform, Load), JOINing tables, Exploratory Data Analysis (EDA), and building a reporting layer via SQL Views.
-* **Power BI:** Star Schema data modeling, and interactive visuals using DAX for performance KPIs. 
-* **Logistics Domain Knowledge:** Applied industry expertise to define "at-risk" or KPI metrics for assets. 
+* **SQL Server(SSMS):** Utilized for comprehensive data cleaning, ETL processes, and complex data engineering to build the project's foundational reporting layer via SQL Views.
+* **Power BI:** Employed for advanced data visualization, multidimensional DAX modeling, and the creation of interactive, executive-level dashboards.
+* **Logistics Domain Knowledge:** Applied industry-specific expertise to define and establish fleet KPIs.
 
 ## The Data
-The dataset is a comprehensive Logistics Operations Database 🔗 [Kaggle source](https://www.kaggle.com/datasets/yogape/logistics-operations-database)
-, consisting of 14 CSV files representing:
+The dataset is a comprehensive Logistics Operations Database 🔗 [Kaggle source](https://www.kaggle.com/datasets/yogape/logistics-operations-database), consisting of 14 CSV files representing:
 * **Core Tables:** `drivers`, `trucks`, `trailers`, `customers`, `facilities`, `routes`
 * **Transaction Tables:** `loads`, `trips`, `fuel_purchases`, `maintenance_records`, `delivery_events`, `safety_incidents`
 * **Aggregated Metrics:** `driver_monthly_metrics`, `truck_utilization_metrics`
@@ -206,13 +205,6 @@ Instead of connecting Power BI to raw, messy data, I built a dedicated reporting
 | `V3_Fuel_Surcharge_Accuracy` | Audits Fuel Surcharge vs. Actual Spend | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V3_Fuel_Surcharge_Accuracy.sql) |
 | `V4_Asset_Health_Summary` | Identifies high-cost underutilized trucks | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V4_Asset_Health_Summary.sql) |
 | `V5_Safety_Risk_Audit` | Ranks incidents by financial impact | [Link](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/V5_Safety_Risk_Audit.sql) |
-
-## Data Modeling (Power BI)
-*UPDATE THIS SECTION LATER AS YOU WORK FURTHER*
-*I moved beyond flat-file analysis by building a Star Schema within Power BI.
-Fact Tables: Loads, Fuel_Purchases, Safety_Incidents.
-Dimension Tables: Drivers, Trucks, Facilities.
-The Benefit: This structure allows for "cross-filtering"—for example, seeing how a specific Driver (Dim) impacts Fuel_Purchases (Fact) vs. Safety_Incidents (Fact).*
 
 ## Power BI Dashboard
 ### Q1: High-Value Customer Performance
