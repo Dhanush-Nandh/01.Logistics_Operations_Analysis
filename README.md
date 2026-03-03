@@ -208,27 +208,27 @@ Instead of connecting Power BI to raw, messy data, I built a dedicated reporting
 
 ## Power BI Dashboard
 ### Q1: High-Value Customer Performance
-[View Dashboard](add-screenshot-link-here)
+[View Dashboard](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/PowerBI-Q1.jpg)
 
 **Key Insight:** There is a $219.46M variance between target and actual revenue, indicating that the fleet is currently only capturing 50% of its total forecasted revenue. Closing this gap in the Top 10 accounts is the primary lever for recovering operational losses.
 
 ### Q2: Driver Retention & Experience
-[View Dashboard](add-screenshot-link-here)
+[View Dashboard](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/PowerBI-Q2.jpg)
 
 **Key Insight:** Workforce stability is a core strength, with Seniors and Veterans making up 75% of the fleet and maintaining high average tenures of 7.4 to 8.7 years. The data suggests a "Retention Sweet Spot" once drivers move past the 5-year mark.
 
 ### Q3: Fuel Surcharge Audit
-[View Dashboard](add-screenshot-link-here)
+[View Dashboard](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/PowerBI-Q3.jpg)
 
 **Key Insight:** The fleet is operating at a massive -$68.60M fuel variance deficit. The current surcharge model only recovers 31% of actual costs, and over 91% of all trips are currently resulting in a net fuel loss, necessitating an immediate renegotiation. 
 
 ### Q4: Asset Performance & Maintenance
-[View Dashboard](add-screenshot-link-here)
+[View Dashboard](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/PowerBI-Q4.jpg)
 
 **Key Insight:** Analysis identified 28 "Dead" assets with zero utilization that are still incurring repair costs and should be liquidated. Furthermore, 39 "High Risk" assets justify their high maintenance through 100% utilization but should be prioritized for the next replacement cycle to reduce the $4M total maintenance spend.
 
 ### Q5: Safety & Financial Risk
-[View Dashboard](add-screenshot-link-here)
+[View Dashboard](https://github.com/Dhanush-Nandh/01.Logistics_Operations_Analysis/blob/main/PowerBI-Q5.jpg)
 
 **Key Insight:** Total financial liability from incidents reached $2.65M. A critical audit reveals that 34% of these costs ($904K) stem from "At-Fault" incidents, with $322K specifically categorized as "Preventable," representing a direct opportunity for cost savings through targeted safety coaching.
 
